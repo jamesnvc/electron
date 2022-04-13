@@ -316,8 +316,13 @@ step-setup-goma-for-build: &step-setup-goma-for-build
       echo 'export NUMBER_OF_NINJA_PROCESSES=300' >> $BASH_ENV
       if [ "`uname`" == "Darwin" ]; then
         echo 'ulimit -n 10000' >> $BASH_ENV
-        echo 'alias python=python3' >> $BASH_ENV
         echo 'sudo launchctl limit maxfiles 65536 200000' >> $BASH_ENV
+        # Horrible Python3 compatibility hack
+        PYTHON3=`which python3`
+        sudo mkdir -p /usr/bin/python
+        sudo chown -R $(id -u):$(id -g) $PYTHON3
+        sudo chown -R $(id -u):$(id -g) /usr/bin/python
+        sudo cp -R $PYTHON3 /usr/bin/python
       fi
       if [ ! -z "$RAW_GOMA_AUTH" ]; then
         echo $RAW_GOMA_AUTH > ~/.goma_oauth2_config
