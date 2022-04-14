@@ -519,7 +519,7 @@ step-install-python-on-mac: &step-install-python-on-mac
     name: Install python on macos
     command: |
       if [ "`uname`" == "Darwin" ]; then
-        brew install python
+        brew reinstall python@3.9
         PATH=$HOME/bin:$PATH
         sudo ln -fs /usr/bin/python3 /usr/local/bin/python
       fi
