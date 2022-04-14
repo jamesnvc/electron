@@ -319,9 +319,7 @@ step-setup-goma-for-build: &step-setup-goma-for-build
         echo 'sudo launchctl limit maxfiles 65536 200000' >> $BASH_ENV
         # Horrible Python3 compatibility hack
         PYTHON3=`which python3`
-        sudo mkdir -p /usr/bin/python
-        sudo chown -R $(id -u):$(id -g) $PYTHON3
-        sudo chown -R $(id -u):$(id -g) /usr/bin/python
+        sudo chown -R $(id -u):$(id -g) /usr/bin
         sudo cp -R $PYTHON3 /usr/bin/python
       fi
       if [ ! -z "$RAW_GOMA_AUTH" ]; then
