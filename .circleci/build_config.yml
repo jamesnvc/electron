@@ -317,10 +317,6 @@ step-setup-goma-for-build: &step-setup-goma-for-build
       if [ "`uname`" == "Darwin" ]; then
         echo 'ulimit -n 10000' >> $BASH_ENV
         echo 'sudo launchctl limit maxfiles 65536 200000' >> $BASH_ENV
-        # Horrible Python3 compatibility hack
-        PYTHON3=`which python3`
-        sudo chown -R $(id -u):$(id -g) /usr/bin
-        sudo cp -R $PYTHON3 /usr/bin/python
       fi
       if [ ! -z "$RAW_GOMA_AUTH" ]; then
         echo $RAW_GOMA_AUTH > ~/.goma_oauth2_config
@@ -1241,6 +1237,12 @@ commands:
           command: |
             sudo mkdir -p /var/portal
             sudo chown -R $(id -u):$(id -g) /var/portal
+            if [ "`uname`" == "Darwin" ]; then
+              # Horrible Python3 compatibility hack
+              PYTHON3=`which python3`
+              sudo chown -R $(id -u):$(id -g) $PYTHON3
+              sudo cp -R $PYTHON3 /usr/bin/python
+            fi
       - when:
           condition: << parameters.halt-if-successful >>
           steps:
