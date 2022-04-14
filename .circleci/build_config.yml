@@ -521,7 +521,7 @@ step-install-python-on-mac: &step-install-python-on-mac
       if [ "`uname`" == "Darwin" ]; then
         PATH=$HOME/bin:$PATH
         brew reinstall python@3.9
-        # sudo ln -fs /usr/local/bin/python3 /usr/local/bin/python
+        sudo ln -fs /usr/local/bin/python3 /usr/bin/python
       fi
 
 step-gn-gen-default: &step-gn-gen-default
