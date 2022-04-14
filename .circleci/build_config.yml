@@ -1242,7 +1242,7 @@ commands:
               # PYTHON3=`which python3`
               # sudo chown -R $(id -u):$(id -g) $PYTHON3
               PATH=$HOME/bin:$PATH
-              # sudo mkdir -p /usr/bin/python
+              sudo mkdir -p /usr/bin/python
               sudo chown -R $(id -u):$(id -g) /usr/bin/python
               sudo ln -fs /usr/bin/python3 /usr/bin/python
             # fi
