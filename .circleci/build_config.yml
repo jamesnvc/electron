@@ -317,12 +317,12 @@ step-setup-goma-for-build: &step-setup-goma-for-build
       if [ "`uname`" == "Darwin" ]; then
         echo 'ulimit -n 10000' >> $BASH_ENV
         echo 'sudo launchctl limit maxfiles 65536 200000' >> $BASH_ENV
-        echo 'alias -g python=python3' >> $BASH_ENV
+        # echo 'alias -g python=python3' >> $BASH_ENV
       fi
       if [ ! -z "$RAW_GOMA_AUTH" ]; then
         echo $RAW_GOMA_AUTH > ~/.goma_oauth2_config
       fi
-      git clone https://github.com/electron/build-tools.git
+      git clone https://github.com/VerteDinde/build-tools.git
       cd build-tools
       npm install
       mkdir third_party
